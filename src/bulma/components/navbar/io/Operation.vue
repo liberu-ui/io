@@ -45,7 +45,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faDatabase, faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { VTooltip } from 'v-tooltip';
-import Avatar from '@enso-ui/ui/src/bulma/pages/administration/users/components/Avatar.vue';
+import Avatar from '@enso-ui/users/src/bulma/pages/users/components/Avatar.vue';
 import CoreOperation from '../../../../core/components/navbar/io/Operation.vue';
 
 library.add(faDatabase, faCaretLeft, faCaretRight);
