@@ -5,7 +5,6 @@ export default {
     name: 'IO',
 
     data: () => ({
-        visible: false,
         imports: [],
         exports: [],
     }),
@@ -69,23 +68,14 @@ export default {
                 ? 'imports'
                 : 'exports';
         },
-        hide() {
-            this.visible = false;
-        },
-        toggle() {
-            this.visible = !this.visible;
-        },
     },
 
     render() {
         return this.$scopedSlots.default({
-            visible: this.visible,
             isTouch: this.isTouch,
             count: this.count,
             imports: this.imports,
             exports: this.exports,
-            toggle: this.toggle,
-            hide: this.hide,
         });
     },
 };

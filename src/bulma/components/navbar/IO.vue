@@ -1,38 +1,24 @@
 <template>
     <core-i-o>
         <template v-slot:default="{
-                isTouch, count, imports, exports, hide, toggle, visible
+                isTouch, count, imports, exports
             }">
-            <div v-if="count"
-                v-click-outside="hide"
-                class="navbar-item io"
-                :class="[
-                    { 'has-dropdown': !isTouch },
-                    { 'is-active': visible }
-                ]">
-                <span class="is-clickable"
-                    v-if="isTouch">
+            <navbar-item icon="sync-alt"
+                @click="$refs.navbarItem.toggle();"
+                ref="navbarItem"
+                v-if="count">
+                <template v-slot:desktop-icon="{ icon }">
                     <span class="icon">
-                        <fa icon="sync-alt"
-                            spin/>
+                        <fa :icon="icon" spin/>
                     </span>
-                    <sup class="has-text-danger operation-count">
-                        {{ count || null }}
-                    </sup>
-                </span>
-                <a :class="['navbar-link', { 'rotate': visible }]"
-                    @click="toggle"
-                    v-else>
-                    <span class="icon">
-                        <fa icon="sync-alt"
-                            spin/>
+                </template>
+                <template v-slot:sup
+                    v-if="count > 0">
+                    <span class="has-text-danger">
+                        {{ count }}
                     </span>
-                    <sup class="has-text-danger operation-count">
-                        {{ count || null }}
-                    </sup>
-                </a>
-                <div v-if="visible"
-                    class="navbar-dropdown is-right">
+                </template>
+                <template v-slot:default>
                     <div class="operation-list">
                         <a v-for="operation in imports"
                             :key="operation.id"
@@ -47,8 +33,8 @@
                                 type="out"/>
                         </a>
                     </div>
-                </div>
-            </div>
+                </template>
+            </navbar-item>
         </template>
     </core-i-o>
 </template>
@@ -59,6 +45,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faSyncAlt, faDatabase, faCaretLeft, faCaretRight,
 } from '@fortawesome/free-solid-svg-icons';
+import NavbarItem from '@enso-ui/ui/src/bulma/components/navbar/NavbarItem.vue';
 import CoreIO from '../../../core/components/navbar/IO.vue';
 import Operation from './io/Operation.vue';
 
@@ -69,31 +56,15 @@ export default {
 
     directives: { clickOutside },
 
-    components: { CoreIO, Operation },
+    components: { CoreIO, Operation, NavbarItem },
 };
 </script>
 
 <style lang="scss">
-    sup.operation-count {
-        font-size: 0.75em;
-        margin-top: -10px;
-    }
-
     div.operation-list {
         width: 300px;
         overflow-x: hidden;
         max-height: 400px;
         overflow-y: auto;
-    }
-
-    .navbar-link {
-        &:after {
-            transform: rotate(135deg);
-            transition: transform .300s ease;
-        }
-
-        &.rotate:after {
-            transform: rotate(-45deg);
-        }
     }
 </style>
