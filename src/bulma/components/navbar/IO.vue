@@ -4,7 +4,7 @@
                 isTouch, count, imports, exports
             }">
             <navbar-item icon="sync-alt"
-                @click="!isTouch && $refs.navbarItem.toggle();"
+                @click="$refs.navbarItem.toggle();"
                 ref="navbarItem"
                 v-if="count">
                 <template v-slot:desktop-icon="{ icon }">
