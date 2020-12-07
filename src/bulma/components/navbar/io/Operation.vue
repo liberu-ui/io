@@ -1,38 +1,72 @@
 <template>
-    <core-operation v-bind="$attrs">
-        <template v-slot:default="{ operation, since, isIn }">
+    <core-operation v-bind="$attrs"
+        v-on="$listeners">
+        <template v-slot:default="{
+                elapsed, end, events, ioTypes,
+                operation, remaining, toggle
+            }">
             <div class="navbar-content">
-                <div class="is-operation">
-                    <div class="level is-marginless">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <avatar v-tooltip.left-start="operation.owner.name"
-                                    class="media  is-16x16"
-                                    :user="operation.owner"/>
-                                <span v-tooltip.left-start="
-                                        `${i18n('file')}: ${operation.name}, ${i18n('elapsed time')}: ${since(operation.since)}`
-                                    "
-                                    class="icon is-small has-text-info has-margin-left-small">
-                                    <fa icon="database"/>
+                <div class="level is-mobile is-marginless">
+                    <div class="level-left">
+                        <div class="level-item">
+                            <p class="one-line">
+                                <span class="has-text-weight-bold">
+                                    {{ ioTypes._get(operation.type) }}
                                 </span>
-                                <span :class="[
-                                        'icon is-small has-text-danger',
-                                        {'animated flash infinite slower': operation.entries > 0}
-                                    ]">
-                                    <fa :icon="['fas', isIn ? 'caret-left' : 'caret-right']"
-                                        transform="shrink-1"/>
-                                </span>
-                                <span class="has-margin-left-small">
-                                    {{ operation.name }}
-                                </span>
-                            </div>
+                                <slot name="status"
+                                    :operation="operation"/>
+                            </p>
                         </div>
-                        <div class="level-right">
-                            <div class="level-item">
-                                <span class="is-bold has-text-success">
-                                    {{ operation.entries | shortNumber }}
+                    </div>
+                    <div class="level-right">
+                        <div class="level-item">
+                            <avatar class="media is-24x24"
+                                :user="operation.owner"/>
+                        </div>
+                    </div>
+                </div>
+                <slot name="body" :operation="operation"/>
+                <div class="level is-mobile has-padding-top-small
+                    has-padding-bottom-small is-marginless">
+                    <div class="level-item">
+                        <progress class="progress is-xsmall is-dark"  
+                            :value="operation.progress"
+                            max="100"
+                            v-if="operation.progress !== null">
+                            {{ operation.progress }}%
+                        </progress>
+                        <progress class="progress is-xsmall is-dark"  
+                            max="100"
+                            v-else>33%
+                        </progress>
+                    </div>
+                    <div class="level-item is-narrow">
+                        <a class="button is-small is-naked"
+                            v-on="events">
+                            <fa icon="times-circle"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="level is-mobile">
+                    <div class="level-left">
+                        <slot name="info"
+                        :operation="operation"/>    
+                    </div>
+                    <div class="level-right">
+                        <div class="level-item">
+                            <span class="is-size-7 has-text-weight-bold">
+                            <span v-if="end">{{ remaining }}</span>
+                            <span v-else>{{ elapsed }}</span>
+                            </span>
+                            <a class="button is-small is-naked"
+                                @click="toggle">
+                                <span class="icon is-small">
+                                    <fa icon="hourglass-end"
+                                        v-if="end"/>
+                                    <fa icon="hourglass-start"
+                                        v-else/>
                                 </span>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -43,33 +77,15 @@
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faDatabase, faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
-import { VTooltip } from 'v-tooltip';
+import { faHourglassStart, faHourglassEnd, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import Avatar from '@enso-ui/users/src/bulma/pages/users/components/Avatar.vue';
 import CoreOperation from '../../../../core/components/navbar/io/Operation.vue';
 
-library.add(faDatabase, faCaretLeft, faCaretRight);
+library.add(faHourglassStart, faHourglassEnd, faTimesCircle);
 
 export default {
     name: 'Operation',
 
-    directives: { tooltip: VTooltip },
-
     components: { CoreOperation, Avatar },
-
-    inject: ['i18n'],
 };
 </script>
-
-<style lang="scss">
-    div.is-operation {
-        white-space: normal;
-        width: 268px;
-        overflow-x: hidden;
-
-        .level-left {
-            max-width: 75%;
-            overflow: hidden;
-        }
-    }
-</style>

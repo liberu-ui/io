@@ -1,43 +1,50 @@
 <script>
+import { mapState } from 'vuex';
 import formatDistance from '@enso-ui/ui/src/modules/plugins/date-fns/formatDistance';
 
 export default {
     name: 'Operation',
-
-    inject: ['route'],
 
     props: {
         operation: {
             type: Object,
             required: true,
         },
-        type: {
-            type: String,
-            required: true,
-            validator: val => ['in', 'out'].includes(val),
-        },
     },
 
+    data: () => ({
+        end: true,
+    }),
+
     computed: {
-        isIn() {
-            return this.type === 'in';
+        ...mapState(['enums']),
+        elapsed() {
+            return formatDistance(this.operation.createdAt);
         },
-        isOut() {
-            return this.type === 'out';
+        remaining() {
+            return this.operation.estimatedEnd
+                ? formatDistance(this.operation.estimatedEnd)
+                : null;
         },
     },
 
     methods: {
-        since(since) {
-            return formatDistance(since);
+        toggle() {
+            this.end = !this.end;
         },
     },
 
     render() {
         return this.$scopedSlots.default({
+            elapsed: this.elapsed,
+            end: this.end,
+            events: {
+                click: () => this.$emit('cancel', this.operation),
+            },
+            ioTypes: this.enums.ioTypes,
             operation: this.operation,
-            since: this.since,
-            isIn: this.isIn,
+            remaining: this.remaining,
+            toggle: this.toggle,
         });
     },
 };

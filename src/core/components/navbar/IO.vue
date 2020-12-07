@@ -4,6 +4,8 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 export default {
     name: 'IO',
 
+    inject: ['route', 'errorHandler', 'toastr'],
+
     data: () => ({
         imports: [],
         exports: [],
@@ -11,8 +13,7 @@ export default {
 
     computed: {
         ...mapGetters('websockets', ['io']),
-        ...mapState(['user', 'meta']),
-        ...mapState('layout', ['isTouch']),
+        ...mapState(['user', 'meta', 'enums']),
         count() {
             return this.imports.length + this.exports.length;
         },
@@ -25,57 +26,83 @@ export default {
 
     methods: {
         ...mapActions('websockets', ['connect']),
+        cancel(operation) {
+            const type = this.enums.ioTypes._get(operation.type);
+
+            axios.patch(this.route(`${type}.cancel`, { [type]: operation.id }))
+                .then(({ data: { message } }) => this.toastr.warning(message))
+                .catch(this.errorHandler);
+        },
         listen() {
             window.Echo.private(this.io)
-                .listen('.io-started', ({ operation }) => {
-                    this.push(operation);
-                }).listen('.io-updated', ({ operation }) => {
-                    this.update(operation);
-                }).listen('.io-stopped', ({ operation }) => {
-                    this.remove(operation);
+                .listen('.import', ({ operation }) => {
+                    this.process(operation);
+                }).listen('.export', ({ operation }) => {
+                    this.process(operation);
                 });
         },
+        process(operation) {
+            switch (`${operation.status}`) {
+                case this.enums.ioStatuses.Started:
+                    this.push(operation);
+                    break;
+                case this.enums.ioStatuses.Stopped:
+                    this.remove(operation);
+                    break;
+                default:
+                    this.update(operation);
+                    break;
+            }
+        },
         push(operation) {
-            const index = this[this.type(operation.type)]
-                .findIndex(op => op.id === operation.id);
+            const index = this.index(operation);
 
             if (index === -1) {
-                this[this.type(operation.type)].push(operation);
+                this.bag(operation.type).push(operation);
             }
         },
         update(operation) {
-            const existing = this[this.type(operation.type)]
-                .find(({ id }) => id === operation.id);
+            const index = this.index(operation);
 
-            if (existing) {
-                existing.entries = operation.entries;
-                existing.status = operation.status;
-                return;
+            if (index !== -1) {
+                this.bag(operation.type).splice(index, 1, operation);
+            } else {
+                this.push(operation);
             }
 
-            this.push(operation);
         },
         remove(operation) {
-            const index = this[this.type(operation.type)]
-                .findIndex(({ id }) => id === operation.id);
+            const index = this.index(operation);
 
             if (index >= 0) {
-                this[this.type(operation.type)].splice(index, 1);
+                this.bag(operation.type).splice(index, 1);
             }
         },
+        index(operation) {
+            return this.bag(operation.type)
+                .findIndex(({ id }) => id === operation.id);
+        },
+        bag(type) {
+            return this[this.type(type)];
+        },
         type(type) {
-            return type === 1
-                ? 'imports'
-                : 'exports';
+            switch (this.enums.ioTypes._get(type)) {
+                case 'import':
+                    return 'imports';
+                case 'export':
+                    return 'exports';
+                default:
+                    throw Error(`Unknown io type: ${this.enums.ioTypes._get(type)}`)
+            }
         },
     },
 
     render() {
         return this.$scopedSlots.default({
-            isTouch: this.isTouch,
             count: this.count,
-            imports: this.imports,
+            events: { cancel: this.cancel },
             exports: this.exports,
+            imports: this.imports,
         });
     },
 };
