@@ -1,5 +1,6 @@
 <template>
-    <operation v-bind="$attrs">
+    <operation v-bind="$attrs"
+        v-on="$listeners">
         <template v-slot:status="{ operation }">
             {{ enums.importStatuses._get(operation.status) }}
         </template>
@@ -23,13 +24,13 @@
                     <fa icon="check"/>
                 </span>
                 <span class="has-text-weight-bold has-text-success">
-                    {{ operation.payload.successful }}
+                    {{ operation.payload.successful | shortNumber }}
                 </span>
                 <span class="icon has-text-danger">
                     <fa icon="times"/>
                 </span>
                 <span class="has-text-weight-bold has-text-danger">
-                    {{ operation.payload.failed }}
+                    {{ operation.payload.failed | shortNumber }}
                 </span>
             </p>
         </template>
@@ -41,6 +42,7 @@ import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import Operation from './Operation.vue';
+import { shortNumber } from '@enso-ui/mixins';
 
 library.add(faCheck, faTimes);
 
@@ -50,6 +52,8 @@ export default {
     components: { Operation },
 
     inject: ['i18n'],
+
+    filters: { shortNumber },
 
     computed: mapState(['enums']),
 };

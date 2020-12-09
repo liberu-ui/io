@@ -68,16 +68,16 @@ export default {
         border-bottom: 1px solid lightgrey;
     }
 
-    width: 300px;
+    width: 350px;
     overflow-x: hidden;
-    max-height: 400px;
+    max-height: 500px;
     overflow-y: auto;
 
     .one-line {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 243px;
+        width: 293px;
     }
     
     .progress.is-xsmall {

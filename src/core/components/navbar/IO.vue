@@ -27,6 +27,7 @@ export default {
     methods: {
         ...mapActions('websockets', ['connect']),
         cancel(operation) {
+            console.log('adsf');
             const type = this.enums.ioTypes._get(operation.type);
 
             axios.patch(this.route(`${type}.cancel`, { [type]: operation.id }))
