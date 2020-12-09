@@ -77,6 +77,7 @@ export default {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        width: 243px;
     }
     
     .progress.is-xsmall {
