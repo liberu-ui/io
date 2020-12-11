@@ -36,11 +36,8 @@ export default {
         },
         listen() {
             window.Echo.private(this.io)
-                .listen('.import', ({ operation }) => {
-                    this.process(operation);
-                }).listen('.export', ({ operation }) => {
-                    this.process(operation);
-                });
+                .listen('.import', ({ operation }) => this.process(operation))
+                .listen('.export', ({ operation }) => this.process(operation));
         },
         process(operation) {
             switch (`${operation.status}`) {
