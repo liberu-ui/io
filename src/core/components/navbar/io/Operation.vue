@@ -14,23 +14,37 @@ export default {
 
     data: () => ({
         end: true,
+        elapsed: null,
+        remaining: null,
+        updater: null,
     }),
 
     computed: {
         ...mapState(['enums']),
-        elapsed() {
-            return formatDistance(this.operation.createdAt);
-        },
-        remaining() {
-            return this.operation.estimatedEnd
-                ? formatDistance(this.operation.estimatedEnd)
-                : null;
-        },
+    },
+
+    beforeMount() {
+        this.update();
+        this.autoUpdate();
+    },
+
+    beforeDestroy() {
+        clearInterval(this.updater);
     },
 
     methods: {
+        autoUpdate() {
+            this.updater = setInterval(() => this.update(), 1000);
+        },
         toggle() {
             this.end = !this.end;
+        },
+        update() {
+            this.elapsed = formatDistance(this.operation.createdAt);
+
+            this.remaining = this.operation.estimatedEnd
+                ? formatDistance(this.operation.estimatedEnd)
+                : null;
         },
     },
 
