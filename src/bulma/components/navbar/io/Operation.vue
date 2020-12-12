@@ -55,7 +55,16 @@
                     <div class="level-right">
                         <div class="level-item">
                             <span class="is-size-7 has-text-weight-bold">
-                            <span v-if="end">{{ remaining }}</span>
+                            <template v-if="end">
+                                <span v-if="remaining">
+                                    {{ remaining }}
+                                </span>
+                                <span class="icon is-small"
+                                    v-else>
+                                    <fa icon="spinner"
+                                        pulse/>
+                                </span>
+                            </template>
                             <span v-else>{{ elapsed }}</span>
                             </span>
                             <a class="button is-small is-naked"
@@ -77,11 +86,11 @@
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHourglassStart, faHourglassEnd, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHourglassStart, faHourglassEnd, faSpinner, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import Avatar from '@enso-ui/users/src/bulma/pages/users/components/Avatar.vue';
 import CoreOperation from '../../../../core/components/navbar/io/Operation.vue';
 
-library.add(faHourglassStart, faHourglassEnd, faTimesCircle);
+library.add(faHourglassStart, faHourglassEnd, faSpinner, faTimesCircle);
 
 export default {
     name: 'Operation',

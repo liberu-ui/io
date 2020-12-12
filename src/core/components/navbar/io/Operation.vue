@@ -1,6 +1,7 @@
 <script>
 import { mapState } from 'vuex';
 import formatDistance from '@enso-ui/ui/src/modules/plugins/date-fns/formatDistance';
+import { isAfter } from 'date-fns';
 
 export default {
     name: 'Operation',
@@ -43,6 +44,7 @@ export default {
             this.elapsed = formatDistance(this.operation.createdAt);
 
             this.remaining = this.operation.estimatedEnd
+                && isAfter(new Date(this.operation.estimatedEnd), new Date())
                 ? formatDistance(this.operation.estimatedEnd)
                 : null;
         },
