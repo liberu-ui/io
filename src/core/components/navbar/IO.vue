@@ -12,7 +12,7 @@ export default {
     }),
 
     computed: {
-        ...mapGetters('websockets', ['io']),
+        ...mapGetters('websockets', ['channels']),
         ...mapState(['user', 'meta', 'enums']),
         count() {
             return this.imports.length + this.exports.length;
@@ -27,7 +27,6 @@ export default {
     methods: {
         ...mapActions('websockets', ['connect']),
         cancel(operation) {
-            console.log('adsf');
             const type = this.enums.ioTypes._get(operation.type);
 
             axios.patch(this.route(`${type}.cancel`, { [type]: operation.id }))
@@ -35,7 +34,7 @@ export default {
                 .catch(this.errorHandler);
         },
         listen() {
-            window.Echo.private(this.io)
+            window.Echo.private(this.channels.io)
                 .listen('.import', ({ operation }) => this.process(operation))
                 .listen('.export', ({ operation }) => this.process(operation));
         },
