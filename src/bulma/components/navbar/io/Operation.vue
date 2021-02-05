@@ -54,9 +54,9 @@
                     </div>
                     <div class="level-right">
                         <div class="level-item">
-                            <span class="is-size-7 has-text-weight-bold">
                             <template v-if="end">
-                                <span v-if="remaining">
+                                <span class="is-size-7 has-text-weight-bold"
+                                    v-if="remaining">
                                     {{ remaining }}
                                 </span>
                                 <span class="icon is-small"
@@ -65,7 +65,9 @@
                                         pulse/>
                                 </span>
                             </template>
-                            <span v-else>{{ elapsed }}</span>
+                            <span class="is-size-7 has-text-weight-bold"
+                                v-else>
+                                {{ elapsed }}
                             </span>
                             <a class="button is-small is-naked"
                                 @click="toggle">
