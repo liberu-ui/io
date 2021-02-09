@@ -30,7 +30,12 @@
                     <fa icon="times"/>
                 </span>
                 <span class="has-text-weight-bold has-text-danger">
-                    {{ operation.payload.failed | shortNumber }}
+                    <template v-if="operation.payload.failed !== null && operation.payload.failed >= 0">
+                         {{ operation.payload.failed | shortNumber }}
+                    </template>
+                    <template v-else>
+                        -
+                    </template>
                 </span>
             </p>
         </template>
