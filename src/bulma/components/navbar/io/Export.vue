@@ -12,7 +12,7 @@
             </p>
         </template>
         <template v-slot:info="{ operation }">
-            <p class="has-vertically-centered-content">
+            <p class="is-flex is-align-items-center">
                 <span class="icon has-text-success">
                     <fa icon="check"/>
                 </span>

@@ -26,8 +26,8 @@
                     </div>
                 </div>
                 <slot name="body" :operation="operation"/>
-                <div class="level is-mobile has-padding-top-small
-                    has-padding-bottom-small is-marginless">
+                <div class="level is-mobile pt-1
+                    pb-1 is-marginless">
                     <div class="level-item">
                         <progress class="progress is-xsmall is-dark"  
                             :value="operation.progress"
