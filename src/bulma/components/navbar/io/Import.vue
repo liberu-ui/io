@@ -24,13 +24,13 @@
                     <fa icon="check"/>
                 </span>
                 <span class="has-text-weight-bold has-text-success">
-                    {{ operation.payload.successful | shortNumber }}
+                    {{ shortNumber(operation.payload.successful) }}
                 </span>
                 <span class="icon has-text-danger">
                     <fa icon="times"/>
                 </span>
                 <span class="has-text-weight-bold has-text-danger">
-                    {{ operation.payload.failed | shortNumber }}
+                    {{ shortNumber(operation.payload.failed) }}
                 </span>
             </p>
         </template>
@@ -53,8 +53,12 @@ export default {
 
     inject: ['i18n'],
 
-    filters: { shortNumber },
-
     computed: mapState(['enums']),
+
+    methods: {
+        shortNumber(value) {
+            return shortNumber(value);
+        },
+    },
 };
 </script>
