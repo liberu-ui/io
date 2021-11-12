@@ -1,17 +1,17 @@
 <template>
     <operation v-bind="$attrs"
         v-on="$listeners">
-        <template v-slot:status="{ operation }">
+        <template #:status="{ operation }">
             {{ enums.exportStatuses._get(operation.status) }}
         </template>
-        <template v-slot:body="{ operation }">
+        <template #:body="{ operation }">
             <p class="one-line">
                 <span class="has-text-weight-bold">
                     {{ i18n('type') }}
                 </span> {{ operation.payload.name }}
             </p>
         </template>
-        <template v-slot:info="{ operation }">
+        <template #:info="{ operation }">
             <p class="is-flex is-align-items-center">
                 <span class="icon has-text-success">
                     <fa icon="check"/>

@@ -1,21 +1,21 @@
 <template>
     <core-i-o>
-        <template v-slot:default="{ events, count, imports, exports }">
+        <template #:default="{ events, count, imports, exports }">
             <navbar-item icon="sync-alt"
                 @click="$refs.navbarItem.toggle();"
                 ref="navbarItem"
                 v-if="count > 0">
-                <template v-slot:desktop-icon="{ icon }">
+                <template #:desktop-icon="{ icon }">
                     <span class="icon">
                         <fa :icon="icon" spin/>
                     </span>
                 </template>
-                <template v-slot:sup>
+                <template #:sup>
                     <span class="has-text-danger">
                         {{ count }}
                     </span>
                 </template>
-                <template v-slot:default>
+                <template #:default>
                     <ul class="operation-list">
                         <li v-for="operation in imports"
                             :key="operation.id"
@@ -52,7 +52,9 @@ export default {
 
     directives: { clickOutside },
 
-    components: { CoreIO, Import, Export, NavbarItem },
+    components: {
+        CoreIO, Import, Export, NavbarItem,
+    },
 };
 </script>
 
@@ -79,7 +81,7 @@ export default {
         text-overflow: ellipsis;
         width: 293px;
     }
-    
+
     .progress.is-xsmall {
         height: 0.5rem;
     }
