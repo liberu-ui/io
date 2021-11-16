@@ -1,21 +1,21 @@
 <template>
     <core-i-o>
-        <template #:default="{ events, count, imports, exports }">
+        <template #default="{ events, count, imports, exports }">
             <navbar-item icon="sync-alt"
                 @click="$refs.navbarItem.toggle();"
                 ref="navbarItem"
                 v-if="count > 0">
-                <template #:desktop-icon="{ icon }">
+                <template #desktop-icon="{ icon }">
                     <span class="icon">
                         <fa :icon="icon" spin/>
                     </span>
                 </template>
-                <template #:sup>
+                <template #sup>
                     <span class="has-text-danger">
                         {{ count }}
                     </span>
                 </template>
-                <template #:default>
+                <template #default>
                     <ul class="operation-list">
                         <li v-for="operation in imports"
                             :key="operation.id"

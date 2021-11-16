@@ -51,7 +51,7 @@ export default {
     },
 
     render() {
-        return this.$scopedSlots.default({
+        return this.$slots.default({
             elapsed: this.elapsed,
             end: this.end,
             events: {

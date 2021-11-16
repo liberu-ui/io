@@ -1,7 +1,6 @@
 <template>
-    <core-operation v-bind="$attrs"
-        v-on="$listeners">
-        <template #:default="{
+    <core-operation v-bind="$attrs"   >
+        <template #default="{
                 elapsed, end, events, ioTypes,
                 operation, remaining, toggle
             }">

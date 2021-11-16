@@ -95,7 +95,7 @@ export default {
     },
 
     render() {
-        return this.$scopedSlots.default({
+        return this.$slots.default({
             count: this.count,
             events: { cancel: this.cancel },
             exports: this.exports,
