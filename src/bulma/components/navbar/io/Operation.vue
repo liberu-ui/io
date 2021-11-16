@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faHourglassStart, faHourglassEnd, faSpinner, faTimesCircle,
@@ -99,6 +100,6 @@ library.add(faHourglassStart, faHourglassEnd, faSpinner, faTimesCircle);
 export default {
     name: 'Operation',
 
-    components: { CoreOperation, Avatar },
+    components: { Avatar, CoreOperation, Fa },
 };
 </script>

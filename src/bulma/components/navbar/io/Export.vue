@@ -31,6 +31,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { shortNumber } from '@enso-ui/mixins';
@@ -41,7 +42,7 @@ library.add(faCheck);
 export default {
     name: 'Export',
 
-    components: { Operation },
+    components: { Fa, Operation },
 
     inject: ['i18n'],
 

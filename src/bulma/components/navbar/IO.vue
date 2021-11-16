@@ -38,6 +38,7 @@
 
 <script>
 import { clickOutside } from '@enso-ui/directives';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSyncAlt, faDatabase } from '@fortawesome/free-solid-svg-icons';
 import NavbarItem from '@enso-ui/ui/src/bulma/components/navbar/NavbarItem.vue';
@@ -53,7 +54,7 @@ export default {
     directives: { clickOutside },
 
     components: {
-        CoreIO, Import, Export, NavbarItem,
+        CoreIO, Export, Fa, Import, NavbarItem,
     },
 };
 </script>
