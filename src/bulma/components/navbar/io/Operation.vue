@@ -1,5 +1,5 @@
 <template>
-    <core-operation v-bind="$attrs"   >
+    <core-operation v-bind="$attrs">
         <template #default="{
                 elapsed, end, events, ioTypes,
                 operation, remaining, toggle
