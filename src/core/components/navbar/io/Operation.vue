@@ -13,6 +13,8 @@ export default {
         },
     },
 
+    emits: ['cancel'],
+
     data: () => ({
         end: true,
         elapsed: null,

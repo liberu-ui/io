@@ -1,10 +1,10 @@
 <template>
-    <core-operation v-bind="$attrs">
-        <template #default="{
-                elapsed, end, events, ioTypes,
-                operation, remaining, toggle
-            }">
-            <div class="navbar-content">
+    <div class="navbar-content">
+        <core-operation v-bind="$attrs">
+            <template #default="{
+                    elapsed, end, events, ioTypes,
+                    operation, remaining, toggle
+                }">
                 <div class="level is-mobile is-marginless">
                     <div class="level-left">
                         <div class="level-item">
@@ -81,9 +81,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </template>
-    </core-operation>
+            </template>
+        </core-operation>
+    </div>
 </template>
 
 <script>
