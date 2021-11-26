@@ -31,7 +31,7 @@ export default {
         this.autoUpdate();
     },
 
-    beforeDestroy() {
+    beforeUnmount() {
         clearInterval(this.updater);
     },
 
