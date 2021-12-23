@@ -4,7 +4,7 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 export default {
     name: 'IO',
 
-    inject: ['route', 'errorHandler', 'toastr'],
+    inject: ['errorHandler', 'http', 'route', 'toastr'],
 
     data: () => ({
         imports: [],
@@ -29,7 +29,7 @@ export default {
         cancel(operation) {
             const type = this.enums.ioTypes._get(operation.type);
 
-            axios.patch(this.route(`${type}.cancel`, { [type]: operation.id }))
+            this.http.patch(this.route(`${type}.cancel`, { [type]: operation.id }))
                 .then(({ data: { message } }) => this.toastr.warning(message))
                 .catch(this.errorHandler);
         },
