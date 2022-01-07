@@ -1,5 +1,6 @@
 <template>
-    <div class="navbar-content">
+    <div class="navbar-content"
+        :class="$attrs.class">
         <core-operation v-bind="$attrs">
             <template #default="{
                     elapsed, end, events, ioTypes,
@@ -101,5 +102,7 @@ export default {
     name: 'Operation',
 
     components: { Avatar, CoreOperation, Fa },
+
+    inheritAttrs: false,
 };
 </script>

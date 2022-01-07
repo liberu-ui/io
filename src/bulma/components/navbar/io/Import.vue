@@ -1,5 +1,5 @@
 <template>
-    <operation v-bind="$attrs">
+    <operation>
         <template #status="{ operation }">
             {{ enums.importStatuses._get(operation.status) }}
         </template>
