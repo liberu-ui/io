@@ -49,7 +49,7 @@ library.add(faCheck, faTimes);
 export default {
     name: 'Import',
 
-    components: { Fa,Operation },
+    components: { Fa, Operation },
 
     inject: ['i18n'],
 

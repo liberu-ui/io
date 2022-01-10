@@ -40,15 +40,15 @@ export default {
         },
         process(operation) {
             switch (`${operation.status}`) {
-                case this.enums.ioStatuses.Started:
-                    this.push(operation);
-                    break;
-                case this.enums.ioStatuses.Stopped:
-                    this.remove(operation);
-                    break;
-                default:
-                    this.update(operation);
-                    break;
+            case this.enums.ioStatuses.Started:
+                this.push(operation);
+                break;
+            case this.enums.ioStatuses.Stopped:
+                this.remove(operation);
+                break;
+            default:
+                this.update(operation);
+                break;
             }
         },
         push(operation) {
@@ -66,7 +66,6 @@ export default {
             } else {
                 this.push(operation);
             }
-
         },
         remove(operation) {
             const index = this.index(operation);
@@ -84,12 +83,12 @@ export default {
         },
         type(type) {
             switch (this.enums.ioTypes._get(type)) {
-                case 'import':
-                    return 'imports';
-                case 'export':
-                    return 'exports';
-                default:
-                    throw Error(`Unknown io type: ${this.enums.ioTypes._get(type)}`)
+            case 'import':
+                return 'imports';
+            case 'export':
+                return 'exports';
+            default:
+                throw Error(`Unknown io type: ${this.enums.ioTypes._get(type)}`);
             }
         },
     },
