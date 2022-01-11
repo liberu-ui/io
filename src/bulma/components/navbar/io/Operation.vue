@@ -1,11 +1,11 @@
 <template>
-    <core-operation v-bind="$attrs"
-        v-on="$listeners">
-        <template v-slot:default="{
-                elapsed, end, events, ioTypes,
-                operation, remaining, toggle
-            }">
-            <div class="navbar-content">
+    <div class="navbar-content"
+        :class="$attrs.class">
+        <core-operation v-bind="$attrs">
+            <template #default="{
+                    elapsed, end, events, ioTypes,
+                    operation, remaining, toggle
+                }">
                 <div class="level is-mobile is-marginless">
                     <div class="level-left">
                         <div class="level-item">
@@ -29,15 +29,16 @@
                 <div class="level is-mobile pt-1
                     pb-1 is-marginless">
                     <div class="level-item">
-                        <progress class="progress is-xsmall is-dark"  
+                        <progress class="progress is-xsmall is-dark"
                             :value="operation.progress"
                             max="100"
                             v-if="operation.progress !== null">
                             {{ operation.progress }}%
                         </progress>
-                        <progress class="progress is-xsmall is-dark"  
+                        <progress class="progress is-xsmall is-dark"
                             max="100"
-                            v-else>33%
+                            v-else>
+33%
                         </progress>
                     </div>
                     <div class="level-item is-narrow">
@@ -50,7 +51,7 @@
                 <div class="level is-mobile">
                     <div class="level-left">
                         <slot name="info"
-                        :operation="operation"/>    
+                        :operation="operation"/>
                     </div>
                     <div class="level-right">
                         <div class="level-item">
@@ -81,14 +82,17 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </template>
-    </core-operation>
+            </template>
+        </core-operation>
+    </div>
 </template>
 
 <script>
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHourglassStart, faHourglassEnd, faSpinner, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+    faHourglassStart, faHourglassEnd, faSpinner, faTimesCircle,
+} from '@fortawesome/free-solid-svg-icons';
 import Avatar from '@enso-ui/users/src/bulma/pages/users/components/Avatar.vue';
 import CoreOperation from '../../../../core/components/navbar/io/Operation.vue';
 
@@ -97,6 +101,8 @@ library.add(faHourglassStart, faHourglassEnd, faSpinner, faTimesCircle);
 export default {
     name: 'Operation',
 
-    components: { CoreOperation, Avatar },
+    components: { Avatar, CoreOperation, Fa },
+
+    inheritAttrs: false,
 };
 </script>

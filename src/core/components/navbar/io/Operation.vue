@@ -13,6 +13,8 @@ export default {
         },
     },
 
+    emits: ['cancel'],
+
     data: () => ({
         end: true,
         elapsed: null,
@@ -29,7 +31,7 @@ export default {
         this.autoUpdate();
     },
 
-    beforeDestroy() {
+    beforeUnmount() {
         clearInterval(this.updater);
     },
 
@@ -51,7 +53,7 @@ export default {
     },
 
     render() {
-        return this.$scopedSlots.default({
+        return this.$slots.default({
             elapsed: this.elapsed,
             end: this.end,
             events: {

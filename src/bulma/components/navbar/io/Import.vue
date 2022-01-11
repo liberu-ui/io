@@ -1,10 +1,9 @@
 <template>
-    <operation v-bind="$attrs"
-        v-on="$listeners">
-        <template v-slot:status="{ operation }">
+    <operation>
+        <template #status="{ operation }">
             {{ enums.importStatuses._get(operation.status) }}
         </template>
-        <template v-slot:body="{ operation }">
+        <template #body="{ operation }">
             <p class="one-line">
                 <span class="has-text-weight-bold">
                     {{ i18n('file') }}
@@ -18,7 +17,7 @@
                 </p>
             </div>
         </template>
-        <template v-slot:info="{ operation }">
+        <template #info="{ operation }">
             <p class="is-flex is-align-items-center">
                 <span class="icon has-text-success">
                     <fa icon="check"/>
@@ -39,17 +38,18 @@
 
 <script>
 import { mapState } from 'vuex';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import Operation from './Operation.vue';
 import { shortNumber } from '@enso-ui/mixins';
+import Operation from './Operation.vue';
 
 library.add(faCheck, faTimes);
 
 export default {
     name: 'Import',
 
-    components: { Operation },
+    components: { Fa, Operation },
 
     inject: ['i18n'],
 
