@@ -11,7 +11,7 @@
                         <div class="level-item">
                             <p class="one-line">
                                 <span class="has-text-weight-bold">
-                                    {{ ioTypes._get(operation.type) }}
+                                    {{ ioTypes._get(operation.type) }}&nbsp;
                                 </span>
                                 <slot name="status"
                                     :operation="operation"/>
@@ -71,7 +71,7 @@
                                 {{ elapsed }}
                             </span>
                             <a class="button is-small is-naked"
-                                @click="toggle">
+                                @click.stop="toggle">
                                 <span class="icon is-small">
                                     <fa icon="hourglass-end"
                                         v-if="end"/>

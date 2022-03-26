@@ -7,7 +7,7 @@
             <p class="one-line">
                 <span class="has-text-weight-bold">
                     {{ i18n('type') }}
-                </span> {{ operation.payload.name }}
+                </span>&nbsp;{{ operation.payload.name }}
             </p>
         </template>
         <template #info="{ operation }">
