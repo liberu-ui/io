@@ -1,18 +1,20 @@
 <template>
     <operation>
         <template #status="{ operation }">
-            {{ enums.importStatuses._get(operation.status) }}
+            <span class="has-text-weight-bold">
+                {{ enums.importStatuses._get(operation.status) }}
+            </span>
         </template>
         <template #body="{ operation }">
             <p class="one-line">
                 <span class="has-text-weight-bold">
-                    {{ i18n('file') }}
+                    {{ i18n('file') }}:
                 </span> {{ operation.payload.filename }}
             </p>
             <div v-if="operation.payload.sheet">
                 <p class="one-line">
                     <span class="has-text-weight-bold">
-                        {{ i18n('sheet') }}
+                        {{ i18n('sheet') }}:
                     </span> {{ operation.payload.sheet }}
                 </p>
             </div>

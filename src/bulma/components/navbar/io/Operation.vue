@@ -11,7 +11,7 @@
                         <div class="level-item">
                             <p class="one-line">
                                 <span class="has-text-weight-bold">
-                                    {{ ioTypes._get(operation.type) }}&nbsp;
+                                    {{ ioTypes._get(operation.type) }}:&nbsp;
                                 </span>
                                 <slot name="status"
                                     :operation="operation"/>
