@@ -30,8 +30,7 @@
                         <li v-for="operation in tasks"
                             :key="operation.id"
                             class="navbar-item">
-                            <task :operation="operation"
-                                v-on="events"/>
+                            <task :operation="operation"/>
                         </li>
                     </ul>
                 </template>

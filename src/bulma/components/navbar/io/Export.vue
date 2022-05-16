@@ -1,5 +1,5 @@
 <template>
-    <operation>
+    <operation cancellable>
         <template #status="{ operation }">
             {{ enums.exportStatuses._get(operation.status) }}
         </template>

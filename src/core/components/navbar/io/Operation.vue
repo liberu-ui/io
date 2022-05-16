@@ -7,6 +7,10 @@ export default {
     name: 'Operation',
 
     props: {
+        cancellable: {
+            type: Boolean,
+            default: false,
+        },
         operation: {
             type: Object,
             required: true,
@@ -54,6 +58,7 @@ export default {
 
     render() {
         return this.$slots.default({
+            cancellable: this.cancellable,
             elapsed: this.elapsed,
             end: this.end,
             events: {

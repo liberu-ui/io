@@ -3,7 +3,8 @@
         :class="$attrs.class">
         <core-operation v-bind="$attrs">
             <template #default="{
-                    elapsed, end, events, ioTypes, operation, remaining, toggle,
+                    elapsed, end, events, ioTypes, operation,
+                    remaining, toggle, cancellable,
                 }">
                 <div class="level is-mobile is-marginless">
                     <div class="level-left">
@@ -41,7 +42,8 @@
 33%
                         </progress>
                     </div>
-                    <div class="level-item is-narrow">
+                    <div class="level-item is-narrow"
+                        v-if="cancellable">
                         <a class="button is-small is-naked"
                             v-on="events">
                             <fa icon="times-circle"/>
