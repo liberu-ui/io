@@ -3,8 +3,7 @@
         :class="$attrs.class">
         <core-operation v-bind="$attrs">
             <template #default="{
-                    elapsed, end, events, ioTypes,
-                    operation, remaining, toggle
+                    elapsed, end, events, ioTypes, operation, remaining, toggle,
                 }">
                 <div class="level is-mobile is-marginless">
                     <div class="level-left">
@@ -18,7 +17,8 @@
                             </p>
                         </div>
                     </div>
-                    <div class="level-right">
+                    <div class="level-right"
+                        v-if="operation.owner">
                         <div class="level-item">
                             <avatar class="media is-24x24"
                                 :user="operation.owner"/>

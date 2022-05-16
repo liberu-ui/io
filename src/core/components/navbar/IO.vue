@@ -9,13 +9,15 @@ export default {
     data: () => ({
         imports: [],
         exports: [],
+        tasks: [],
     }),
 
     computed: {
         ...mapGetters('websockets', ['channels']),
         ...mapState(['user', 'meta', 'enums']),
         count() {
-            return this.imports.length + this.exports.length;
+            return ['imports', 'exports', 'tasks']
+                .reduce((count, type) => (count + this[type].length), 0);
         },
     },
 
@@ -34,14 +36,16 @@ export default {
         listen() {
             window.Echo.private(this.channels.io)
                 .listen('.import', ({ operation }) => this.process(operation))
-                .listen('.export', ({ operation }) => this.process(operation));
+                .listen('.export', ({ operation }) => this.process(operation))
+                .listen('.task', ({ operation }) => this.process(operation));
         },
         process(operation) {
+            console.log(operation);
             switch (`${operation.status}`) {
             case this.enums.ioStatuses.Started:
                 this.push(operation);
                 break;
-            case this.enums.ioStatuses.Stopped:
+            case this.enums.ioStatuses.Finalized:
                 this.remove(operation);
                 break;
             default:
@@ -85,6 +89,8 @@ export default {
                 return 'imports';
             case 'export':
                 return 'exports';
+            case 'task':
+                return 'tasks';
             default:
                 throw Error(`Unknown io type: ${this.enums.ioTypes._get(type)}`);
             }
@@ -97,6 +103,7 @@ export default {
             events: { cancel: this.cancel },
             exports: this.exports,
             imports: this.imports,
+            tasks: this.tasks,
         });
     },
 };

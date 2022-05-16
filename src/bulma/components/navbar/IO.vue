@@ -1,6 +1,6 @@
 <template>
     <core-i-o>
-        <template #default="{ events, count, imports, exports }">
+        <template #default="{ events, count, imports, exports, tasks }">
             <navbar-item icon="sync-alt"
                 v-if="count > 0">
                 <template #desktop-icon="{ icon }">
@@ -27,6 +27,12 @@
                             <export :operation="operation"
                                 v-on="events"/>
                         </li>
+                        <li v-for="operation in tasks"
+                            :key="operation.id"
+                            class="navbar-item">
+                            <task :operation="operation"
+                                v-on="events"/>
+                        </li>
                     </ul>
                 </template>
             </navbar-item>
@@ -43,6 +49,7 @@ import NavbarItem from '@enso-ui/ui/src/bulma/components/navbar/NavbarItem.vue';
 import CoreIO from '../../../core/components/navbar/IO.vue';
 import Import from './io/Import.vue';
 import Export from './io/Export.vue';
+import Task from './io/Task.vue';
 
 library.add(faSyncAlt, faDatabase);
 
@@ -52,7 +59,7 @@ export default {
     directives: { clickOutside },
 
     components: {
-        CoreIO, Export, Fa, Import, NavbarItem,
+        CoreIO, Export, Fa, Import, NavbarItem, Task,
     },
 };
 </script>
