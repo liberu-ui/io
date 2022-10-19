@@ -40,7 +40,6 @@ export default {
                 .listen('.task', ({ operation }) => this.process(operation));
         },
         process(operation) {
-            console.log(operation);
             switch (`${operation.status}`) {
             case this.enums.ioStatuses.Started:
                 this.push(operation);
