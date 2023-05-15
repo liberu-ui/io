@@ -1,5 +1,5 @@
 {
-  "name": "@cgdsoftware/io",
+  "name": "@liberu-ui/io",
   "version": "3.1.1",
   "description": "Basic io package",
   "main": "src/bulma/components/navbar/IO.vue",
@@ -21,10 +21,10 @@
   },
   "homepage": "https://github.com/enso-ui/io#readme",
   "dependencies": {
-    "@cgdsoftware/directives": "^2.0",
-    "@cgdsoftware/mixins": "^4.0",
-    "@cgdsoftware/ui": "^6.0",
-    "@cgdsoftware/users": "^3.0",
+    "@liberu-ui/directives": "^2.0",
+    "@liberu-ui/mixins": "^4.0",
+    "@liberu-ui/ui": "^6.0",
+    "@liberu-ui/users": "^3.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/vue-fontawesome": "3.0.0-5",
