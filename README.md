@@ -1,10 +1,10 @@
 # IO
 
-![npm license](https://img.shields.io/npm/l/@enso-ui/IO.svg) 
-![npm download](https://img.shields.io/npm/dm/@enso-ui/IO.svg) 
-![GitHub top language](https://img.shields.io/github/languages/top/enso-ui/IO.svg) 
-![GitHub issues](https://img.shields.io/github/issues/enso-ui/IO.svg) 
-![npm version](https://img.shields.io/npm/v/@enso-ui/IO.svg) 
+![npm license](https://img.shields.io/npm/l/@liberu-ui/IO.svg) 
+![npm download](https://img.shields.io/npm/dm/@liberu-ui/IO.svg) 
+![GitHub top language](https://img.shields.io/github/languages/top/liberu-ui/IO.svg) 
+![GitHub issues](https://img.shields.io/github/issues/liberu-ui/IO.svg) 
+![npm version](https://img.shields.io/npm/v/@liberu-ui/IO.svg) 
 
 ## Usage
 The component cannot be used outside of the Liberu ecosystem.

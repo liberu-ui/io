@@ -34,7 +34,7 @@ import { mapState } from 'vuex';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { shortNumber } from '@enso-ui/mixins';
+import { shortNumber } from '@liberu-ui/mixins';
 import Operation from './Operation.vue';
 
 library.add(faCheck);

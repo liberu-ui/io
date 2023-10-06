@@ -1,6 +1,6 @@
 <script>
 import { mapState } from 'vuex';
-import formatDistance from '@enso-ui/ui/src/modules/plugins/date-fns/formatDistance';
+import formatDistance from '@liberu-ui/ui/src/modules/plugins/date-fns/formatDistance';
 import { isAfter } from 'date-fns';
 
 export default {
